@@ -1,21 +1,18 @@
+require('dotenv').config();
 const express = require('express');
-const cors = require('cors')
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const app = express();
+const port = process.env.MY_PORT;
 
+require('./config/mongoose.config')
 
-//server config first
-app.use(cors());
+app.use(cors({credentials: true, origin: 'http://localhost:3000' }));
+app.use(cookieParser());
 app.use(express.json());
-app.use(express.urlencoded({
-    extended: true,
-}));
+app.use(express.urlencoded({extended: true}));
 
-//run mongoose connect
-// require('./config/mongoose.config');
+require('./routes/user.routes')(app)
+require('./routes/wall.routes')(app)
 
-//routes next
-// require('./routes/movie.routes')(app)
-
-app.listen(8000, () => {
-    console.log("Listening at Port 8000")
-})
+app.listen(port, ()=> console.log(`Listening on port: ${port}`));
