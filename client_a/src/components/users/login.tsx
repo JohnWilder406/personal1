@@ -1,12 +1,12 @@
 import React, {useState, useContext} from 'react';
 import {Card, Form, Button, Row, Col, Container, Modal} from 'react-bootstrap';
 import axios from 'axios'
-import { Link, navigate } from '@reach/router';
-import { LoginContext } from '../../context/context';  
+// import { Link, navigate } from '@reach/router';
+// import { LoginContext } from '../../context/context';  
 
 
 const Login = (props) => {
-    const {setId} = useContext(LoginContext);
+    // const {setId} = useContext(LoginContext);
     const {setToken} = props;
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -30,8 +30,8 @@ const Login = (props) => {
         .then((res) => {
             console.log(res);
             setToken(true);
-            setId(res.data.userId);
-            navigate("/main");            
+            // setId(res.data.userId);
+            // navigate("/main");            
         })
         .catch(err => {
             console.log(err.response.data.message);
@@ -62,8 +62,8 @@ const Login = (props) => {
         <Button className='submit_btn' size="lg" type="submit" >Login</Button>
         </Form>
         
-        <Row><Link style={{margin: 'auto'}} to="/register">Not registered? Click here.</Link></Row>
-        <Row><Link style={{margin: 'auto'}} to="/admin">Admin? Click here.</Link></Row>
+        {/* <Row><Link style={{margin: 'auto'}} to="/register">Not registered? Click here.</Link></Row>
+        <Row><Link style={{margin: 'auto'}} to="/admin">Admin? Click here.</Link></Row> */}
         </Card.Body>
     </Card>
 

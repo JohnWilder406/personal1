@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import {navigate, Link} from '@reach/router';
+// import {navigate, Link} from '@reach/router';
 import { Container, Card, Form, Row, Col, Button, Modal } from  'react-bootstrap';
 
 const AdminLogin = (props) => {
@@ -28,7 +28,7 @@ const AdminLogin = (props) => {
                 setErrors(res.data.errors)
             } else {
             setAdmin(true)
-            navigate("/admin/main")
+            // navigate("/admin/main")
             }
         })
         .catch(err => {
@@ -58,7 +58,7 @@ const AdminLogin = (props) => {
             </Form.Group>
         <Button className='submit_btn' size="lg" type="submit" >Login</Button>
         </Form>
-        <Link style={{margin: 'auto'}} to="/">Not an Admin? Click here.</Link>
+        {/* <Link style={{margin: 'auto'}} to="/">Not an Admin? Click here.</Link> */}
         </Card.Body>
     </Card>
     <Modal show={show} onHide={handleClose} animation={false}>

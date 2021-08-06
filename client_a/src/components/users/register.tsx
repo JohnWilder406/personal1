@@ -1,11 +1,17 @@
 import React, {useState} from 'react';
 import {Card, Form, Button, Row, Col, Container} from 'react-bootstrap';
 import axios from 'axios'
-import { Link, navigate } from '@reach/router';
+// import { Link, navigate } from '@reach/router';
 
 const Register= () => {
     const [confirmReg, setConfirmReg] = useState("");
-    const [errs, setErrs] = useState({});
+    const [errs, setErrs] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirmPassword: ""
+    });
     const [user, setUser] = useState({
         firstName: "",
         lastName: "",
@@ -42,7 +48,7 @@ const Register= () => {
                 })
                 setConfirmReg("Thank you for Registering, you can now log in!");
                 setErrs({});
-                navigate("/")
+                // navigate("/")
             }
             })
             .catch((err) => {
@@ -95,7 +101,7 @@ const Register= () => {
         <Button className="submit_btn" type="submit" size="lg" >Register</Button>
         </Form> 
         
-        <Link to="/">Return to Login Page</Link>
+        {/* <Link to="/">Return to Login Page</Link> */}
         </Card.Body>
     </Card> 
     </Container>
