@@ -47,7 +47,13 @@ const Register= () => {
                     confirmPassword: "",
                 })
                 setConfirmReg("Thank you for Registering, you can now log in!");
-                setErrs({});
+                setErrs({
+                    firstName: "",
+                    lastName: "",
+                    email: "",
+                    password: "",
+                    confirmPassword: ""
+                });
                 // navigate("/")
             }
             })
