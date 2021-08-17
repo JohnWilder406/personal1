@@ -7,6 +7,8 @@ import {
 import './App.css';
 import UserMain from "./views/users/main";
 import UserList from "./components/admin/userlist";
+import AddClimb from "./components/users/addclimb";
+import AddWall from "./components/users/addwall";
 
 function App() {
   return (
@@ -15,6 +17,12 @@ function App() {
         <Switch>
           <Route path="/userMain">
             <UserMain />
+          </Route>
+          <Route path="/addwall">
+            <AddWall />
+          </Route>
+          <Route path="/addclimb">
+            <AddClimb />
           </Route>
           <Route path="/adminMain">
             <UserList />
