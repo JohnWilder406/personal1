@@ -1,11 +1,12 @@
 const Walls = require("../models/wall.model");
 
 module.exports.createWall = (req,res) => {
-    const {name, duration, difficulty} = req.body;
+    const {name, angle, height, number} = req.body;
     Walls.create({
         name,
         angle,
-        height
+        height,
+        number
     })
         .then(wall=> res.json(wall))
         .catch(err => res.json(err))

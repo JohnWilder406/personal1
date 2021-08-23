@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Table, Form, Row, Col, Button, Nav, Navbar, Card} from 'react-bootstrap';
 import Search from '../../components/users/Search';
 import Logout from '../../components/users/Logout';
+import { Link } from 'react-router-dom';
 
 const UserMain = (props) => {
     const [walls, setWalls] = useState([]);
@@ -19,7 +20,7 @@ const UserMain = (props) => {
             .catch((err) => {
                 console.log(err)
             })
-    })
+    }, [])
 
 
 
@@ -42,9 +43,7 @@ const UserMain = (props) => {
             <Navbar bg="dark" variant="dark">
                 <Navbar.Brand style={{marginLeft: "10px"}} className="navbrand">Spray Brand Wall App</Navbar.Brand>
                 <Nav className="mr-auto">
-                    <Button variant="dark">Add Wall</Button>
-                    <Button variant="dark"></Button>
-                    <Button variant="dark"></Button>
+                    <Nav.Link href="/addwall">Add A Wall</Nav.Link>
                 </Nav>
                 <div style={{marginLeft: "275px"}}>
                     <Search searchQuery={searchQuery} onChange={updateInput} />

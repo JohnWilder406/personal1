@@ -34,6 +34,9 @@ const WallSchema = new mongoose.Schema({
     },
 
     climbs: [ClimbSchema],
+    number: {
+        type: Number,
+    }
 
 }, {timestamps: true});
 
