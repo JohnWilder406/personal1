@@ -3,48 +3,46 @@ import React, { useState, useEffect } from 'react';
 import { Container, Table, Form, Row, Col, Button, Nav, Navbar, Card} from 'react-bootstrap';
 import Search from '../../components/users/Search';
 import Logout from '../../components/users/Logout';
-import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-const UserMain = (props) => {
-    const [walls, setWalls] = useState([]);
-    const [wallsDefault, setWallsDefault] = useState([]);
+const UserClimbs = (props) => {
+    const {wall} = props
+    const [wallInfo, setWallInfo] = useState([]);
+    const [climbs, setClimbs] = useState([])
+    const [climbDefault, setClimbDefault] = useState([]);
     const [searchQuery, setSearchQuery] = useState();
-    let history = useHistory();
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/walls')
+        axios.get('http://localhost:8000/api/walls/' + wall._id)
             .then((res) => {
                 console.log(res)
-                setWalls(res.data)
-                setWallsDefault(res.data)
+                setWallInfo(res.data)
+                setClimbs(res.data.climbs)
+                setClimbDefault(res.data.climbs)
             })
             .catch((err) => {
                 console.log(err)
             })
     }, [])
 
-    const handleClick = () => {
-        history.push('/climbs')
-    }
-
 
 
         //search filter
         const updateInput = async (searchQuery) => {
-        const filtered = wallsDefault.filter(wall => {
-            if(wall.name.toLowerCase().includes(searchQuery.toLowerCase())) {
-                return wall.name.toLowerCase().includes(searchQuery.toLowerCase())
+        const filtered = climbDefault.filter(climb => {
+            if(climb.name.toLowerCase().includes(searchQuery.toLowerCase())) {
+                return climb.name.toLowerCase().includes(searchQuery.toLowerCase())
             }
             
         })
         setSearchQuery(searchQuery);
-        setWalls(filtered)
+        setClimbs(filtered)
     }
 
 
     return (
         <Container>
-            <h1>User Main Page</h1>
+            <h1>Climbs</h1>
             <Navbar bg="dark" variant="dark">
                 <Navbar.Brand style={{marginLeft: "10px"}} className="navbrand">Spray Brand Wall App</Navbar.Brand>
                 <Nav className="mr-auto">
@@ -61,16 +59,16 @@ const UserMain = (props) => {
                 <Table>
                     <thead>
                         <th>Name</th>
-                        <th>Angle</th>
-                        <th>Height</th>
-                        <th># of Climbs</th>
+                        <th>Difficulty</th>
+                        <th>First Ascent</th>
+                        <th># of Repeats</th>
                         <th>Actions</th>
                     </thead>
                     <tbody>
                         {
-                            walls.map((wall, idx) => {
+                            climbs.map((climb, idx) => {
                                 return(
-                                    <tr key={idx}><td>{wall.name}</td><td>{wall.angle}</td><td>{wall.height}</td><td>{wall.climbs.length}</td><td><Button onClick={handleClick}>Select Wall</Button><Button>Delete Wall</Button></td></tr>
+                                    <tr key={idx}><td>{climb.name}</td><td>{climb.difficulty}</td><td>{climb.firstAscent}</td><td>{climbs.ascents.length}</td><td><Button>Favorite Climb</Button><Button>Sent!</Button></td></tr>
                                 )
                             })
                         }
@@ -82,4 +80,4 @@ const UserMain = (props) => {
     )
 }
 
-export default UserMain;
+export default UserClimbs;
